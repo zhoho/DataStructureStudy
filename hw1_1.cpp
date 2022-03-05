@@ -1,6 +1,13 @@
 #include <iostream>
-using namespace std;
 
+
+void Swap(int &a, int &b){
+    int tmp;
+    tmp = a;
+    a = b;
+    b = tmp;
+}
+ 
 void my_sort(int * list, int n)
 {
     int j, k, min, t;
@@ -11,11 +18,8 @@ void my_sort(int * list, int n)
         {
             if(list[k] < list[min])
                 min = k;
-
-        t = list[j];
-        list[j] = list[min];
-        list[min] = t;
         }
+        Swap(list[min], list[j]);
     }
 }
 
