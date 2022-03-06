@@ -1,7 +1,7 @@
 #include <iostream>
 
 
-void Swap(int &a, int &b){
+void swap(int &a, int &b){
     int tmp;
     tmp = a;
     a = b;
@@ -19,7 +19,7 @@ void my_sort(int * list, int n)
             if(list[k] < list[min])
                 min = k;
         }
-        Swap(list[min], list[j]);
+        swap(list[min], list[j]);
     }
 }
 
