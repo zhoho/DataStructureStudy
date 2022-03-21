@@ -39,7 +39,7 @@ bool mystack::stack_empty()
 int main()
 {
     mystack s1;
-    int list[5] = { 32, 123, 27, 131, 242 }, i, x;
+    int list[5] = {32, 123, 27, 131, 242}, i, x;
     s1.init();
     for (i = 0; i < 5; i++)
         if (list[i]> 100)
