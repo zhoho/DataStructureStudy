@@ -69,7 +69,6 @@ int main(void)
     string input, output;
     cout << "input infix";
     cin >> input;
-    // input += EOS;
     stack1.push(EOS);
 
     for(int i = 0; i < input.size(); i++)
@@ -77,28 +76,42 @@ int main(void)
         if(is_operand(input[i]) == true)
             output += input[i];
         else
+        {
             if(input[i] == '(')
             {
                 stack1.push(input[i]);
             }
             else if(input[i] == ')')
             {
-                while(stack1.top_element() != '(')
+                while(1)
                 {
-                    output += stack1.top_element();
-                    stack1.pop();
+                    if(stack1.top_element() == '(') break;
+                    else
+                    {
+                    output += stack1.pop();
+                    }
                 }
                 stack1.pop();
             }
             else
             {
-                
+                if(get_precedence(stack1.top_element()) > get_precedence(input[i]))
+                {
+                    while(1)
+                    {
+                        output += stack1.pop();
+                        if(get_precedence(stack1.top_element() < get_precedence(input[i]))) break;
+                    }
+                    stack1.push(input[i]);
+                }
+                else
+                {
+                    stack1.push(input[i]);
+                }
             }
-
-
-            
+        }   
     }
-    while(stack1.top_element() == '$')
+    while(stack1.top_element() != '$')
     {
         output += stack1.pop();
     }
