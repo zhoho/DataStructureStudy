@@ -52,7 +52,7 @@ int main()
     char t;
     mystack stack1;
     t = stack1.pop();
-    //cin >> input;
+    // cin >> input;
     cout << "input some";
     char exp[SIZE];
     cin.getline(exp,SIZE);

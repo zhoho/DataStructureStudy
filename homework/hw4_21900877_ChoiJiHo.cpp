@@ -46,7 +46,7 @@ char stack::top_element()
 }
 
 bool is_operand(char ch){
-    if((ch == '(') || (ch == ')') || (ch == '+') || (ch == '-') ||(ch == '*') || (ch == '/') ||(ch == '%'))
+    if((ch == '(') || (ch == ')') || (ch == '+') || (ch == '-') ||(ch == '*') || (ch == '/') ||(ch == '%') ||(ch == '$'))
         return false;
     else
         return true;
@@ -54,36 +54,53 @@ bool is_operand(char ch){
 
 int get_precedence(char a)
 {
-    if ((a =='$') || (a == '(' )) return(0);
-    if ((a =='+') || (a == '-' )) return(1);
-    if ((a =='*') || (a == '/' ) || (a == '%')) return(2);
+    if ((a =='$') || (a == '(' )) 
+        return 0;
+    else if ((a =='+') || (a == '-' )) 
+        return 1;
+    else if ((a =='*') || (a == '/' ) || (a == '%')) 
+        return 2;
+    else return 3;
 }
 
-int main()
+int main(void)
 {
     stack stack1;
     string input, output;
     cout << "input infix";
     cin >> input;
-    input += EOS;
+    // input += EOS;
     stack1.push(EOS);
 
     for(int i = 0; i < input.size(); i++)
     {
-        if(is_operand(input[i]))
-            output+=input[i];
+        if(is_operand(input[i]) == true)
+            output += input[i];
         else
-            if(get_precedence(input[i]) == ')')
-                while(input[i]=='(')
-                    output += stack1.pop();
-            else if(get_precedence(input[i]) > stack1.top_element())
-                while(get_precedence(input[i]) < stack1.top_element())
-                    output+=stack1.pop();
-                stack1.push(input[i]);   
+            if(input[i] == '(')
+            {
+                stack1.push(input[i]);
+            }
+            else if(input[i] == ')')
+            {
+                while(stack1.top_element() != '(')
+                {
+                    output += stack1.top_element();
+                    stack1.pop();
+                }
+                stack1.pop();
+            }
+            else
+            {
+                
+            }
+
+
+            
     }
     while(stack1.top_element() == '$')
     {
-        output+=stack1.pop();
+        output += stack1.pop();
     }
     cout << output;
 
