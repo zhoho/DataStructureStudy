@@ -45,35 +45,34 @@ bool match_check(int c1, int c2)
         return false;
 }
 
-int main()
+int main(void)
 {
     int result = 0;
-    string input;
     char t;
+    string input;
     mystack stack1;
     t = stack1.pop();
+    char exp[SIZE];
     // cin >> input;
     cout << "input some";
-    char exp[SIZE];
     cin.getline(exp,SIZE);
     input = exp;
     int len = input.size();
     for(int i = 0; i < len; i++)
     { 
-        if(result == 1)
-            break;
-        
+        // if(result == 1)
+        //     break;
         if(input[i] == '(' || input[i] == '{' || input[i] == '[')
         {
             for(int j = 0; j < len; j++)
             {
-              if(match_check(i,j) == false) 
+              if(match_check(i,j) == true) 
                   result = 1;
                   break;
             }
         }
     }
-    if(result == 1)
+    if(result == 0)
         cout << "error";
     else
         cout << "good";
