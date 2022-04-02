@@ -51,31 +51,31 @@ int main(void)
     char t;
     string input;
     mystack stack1;
-    t = stack1.pop();
     char exp[SIZE];
-    // cin >> input;
-    cout << "input some";
+    cout << "input some : ";
     cin.getline(exp,SIZE);
     input = exp;
     int len = input.size();
     for(int i = 0; i < len; i++)
-    { 
-        // if(result == 1)
-        //     break;
-        if(input[i] == '(' || input[i] == '{' || input[i] == '[')
+    {
+        stack1.push(input[i]);
+    }
+    for(int i = 0; i < len; i++)
+    {
+        t = stack1.pop();
+        if(match_check(t,input[i]) == true)
         {
-            for(int j = 0; j < len; j++)
-            {
-              if(match_check(i,j) == true) 
-                  result = 1;
-                  break;
-            }
+            result = 0;
+        }
+        else
+        {
+            result = 1;
         }
     }
     if(result == 0)
-        cout << "error";
-    else
         cout << "good";
+    else
+        cout << "error";
 
     return 0;
 }
