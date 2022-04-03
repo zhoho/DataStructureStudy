@@ -8,8 +8,8 @@ class mystack
     int stack[100];
     int top;
     public:
-        void push(int a);
-        int pop();
+        void push(char a);
+        char pop();
         bool stack_empty();
         void init();
 };
@@ -19,13 +19,13 @@ void mystack::init()
     int top = 0;
 }
 
-void mystack::push(int a)
+void mystack::push(char a)
 {
     stack[top] = a;
     top++;
 }
 
-int mystack::pop()
+char mystack::pop()
 {
     top--;
     return(stack[top]);
@@ -58,20 +58,23 @@ int main(void)
     int len = input.size();
     for(int i = 0; i < len; i++)
     {
-        stack1.push(input[i]);
-    }
-    for(int i = 0; i < len; i++)
-    {
-        t = stack1.pop();
-        if(match_check(t,input[i]) == true)
+        if(input[i] == '(' || input[i] == '[' || input[i] == '{')
+            stack1.push(input[i]);
+        else if(input[i] == ')' || input[i] == ']' || input[i] == '}')
         {
-            result = 0;
-        }
-        else
-        {
-            result = 1;
+            if(stack1.stack_empty() == true)
+                result = 1;
+            else{
+            t = stack1.pop();
+            if(match_check(t,input[i]) == false)
+                result = 1;
+            }
         }
     }
+    // cout << stack1.pop();
+    if(stack1.stack_empty() == false) // 비어있지않으면 일치하지 않으므로 error
+        result = 1;
+
     if(result == 0)
         cout << "good";
     else
