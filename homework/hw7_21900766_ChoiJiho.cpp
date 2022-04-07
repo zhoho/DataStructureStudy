@@ -50,13 +50,12 @@ void my_queue::insert_q(element x)
 element my_queue::delete_q()
 {
     element tmp;
-    element a;
-    if(!queue_empty())
+    if(!queue_empty()) //비어있지않으면 즉 데이터가 있으면 값 return 비어있으면?
     {
         tmp = q[front];
         front = (front + 1) % Q_SIZE;
         return tmp;
-    } // return type 해결하기
+    }
 }
 
 bool my_queue::queue_full()
