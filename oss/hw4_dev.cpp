@@ -24,6 +24,22 @@ mystack::mystack()
     top = 0;
 }
 
+bool mystack::stack_empty()
+{
+    if(top == 0)
+        return 1;
+    else
+        return 0;
+}
+
+bool mystack::stack_full()
+{
+    if(top >= SIZE)
+        return 1;
+    else
+        return 0;
+}
+
 void mystack::push(char x)
 {
     if(stack_full())
@@ -42,23 +58,6 @@ char mystack::pop()
         top --;
         return s[top];
     }
-
-}
-
-bool mystack::stack_empty()
-{
-    if(top == 0)
-        return 1;
-    else
-        return 0;
-}
-
-bool mystack::stack_full()
-{
-    if(top >= SIZE)
-        return 1;
-    else
-        return 0;
 }
 
 char mystack::top_element()
@@ -87,50 +86,54 @@ int get_precedence(char a)
     else return 3;
 }
 
-int main(void)
+int main()
 {
     mystack stack;
     string input, output;
-    cout << "input infix";
+    cout << "input infix \n";
     cin >> input;
     stack.push(EOS);
     
     for(int i = 0; i < input.size(); i++)
     {
-        if(is_operand(input[i] == true))
+        if(is_operand(input[i]) == true)
             output += input[i];
         else
         {
-        if(input[i] == '(')
-        {
-            stack.push(input[i]);
-        }
-        else if(input[i] == ')')
-        {
-            while(1)
+            if(input[i] == '(')
             {
-                if(stack.top_element() == '(')
-                    break;
-                else
-                output += stack.pop();
+                stack.push(input[i]);
             }
-            stack.pop();
-        }
-        else
-        {
-            if(get_precedence(stack.top_element() < get_precedence(input[i])))
+            else if(input[i] == ')')
             {
                 while(1)
                 {
-                    output += stack.pop();
-                    if(get_precedence(stack.top_element() < get_precedence(input[i])))
+                    if(stack.top_element() == '(')
                         break;
+                    else
+                    {
+                        output += stack.pop();
+                    }
                 }
-                stack.push(input[i]);
+                stack.pop();
             }
             else
-                stack.push(input[i]);
-        }
+            {
+                if(get_precedence(stack.top_element()) > get_precedence(input[i]))
+                {
+                    while(1)
+                    {
+                        output += stack.pop();
+                        if(get_precedence(stack.top_element()) < get_precedence(input[i]))
+                            break;
+                    }
+                    stack.push(input[i]);
+                }
+                else
+                {
+                    stack.push(input[i]);
+                }
+            }
         }
     }
 // Infix expression을 Postfix expression으로 변환하는 프로그램을 작성하시오.
