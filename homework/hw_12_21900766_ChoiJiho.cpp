@@ -124,27 +124,17 @@ int myheap::node_delete_by_name(string tname)
 
 int delete_node(element a[], int troot, string tname, int n)
 {
-    if(troot > n)
+    if (troot > n)
         return 0;
-    if(troot == n)
-    {
-        a[troot] = a[-1];
-        a[-1] = tmp;
-    }
-}
-
-double summation(element a[], int troot, int n)
-{
-    if(troot > n)
-        return 0;
-    return (a[troot].score + summation(a, 2*troot, n) + summation(a, 2*troot + 1, n));
+    if (a[troot] == tname)
+        return 1;
+    else
+        
 }
 
 void heap_adjust(element a[], int troot, int size)
 {
     
-
-
 }
 
 
