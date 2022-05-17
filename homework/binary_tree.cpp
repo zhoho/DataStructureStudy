@@ -23,8 +23,7 @@ class my_tree
         node *root;
         my_tree();
         int insert_root(node t);
-        int insert_left(string tname, node t);
-        int insert_right(string tname, node t);
+n        int insert_right(string tname, node t);
 
         double score_sum();
         double score_average();

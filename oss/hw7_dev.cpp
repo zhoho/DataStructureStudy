@@ -69,7 +69,7 @@ bool myqueue::queue_empty()
 
 bool myqueue::queue_full()
 {
-    if((rear+1)%SIZE == front)
+    if((rear + 1)%SIZE == front)
         return true;
     else
         return false;

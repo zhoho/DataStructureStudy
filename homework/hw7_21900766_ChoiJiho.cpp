@@ -60,7 +60,7 @@ element my_queue::delete_q()
 
 bool my_queue::queue_full()
 {
-    if((rear + 1) % Q_SIZE == front)
+    if((rear + 1) % Q_SIZE == front) 
         return true;
     else
         return false;
