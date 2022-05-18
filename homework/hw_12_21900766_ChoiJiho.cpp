@@ -19,9 +19,10 @@ void element::set_data(string n, double s)
 class myheap
 {
     element h[SIZE];
-    int csize;
+    int csize; // the number of elements
     public:
         myheap();
+        myheap(element a[], int n);
         int hsize();
         void insert_heap(element t);
         element delete_heap();
@@ -30,7 +31,20 @@ class myheap
         double score_sum();
         double score_average();
         int node_delete_by_name(string tname);
+        void adjust(int troot);
 };
+
+myheap::myheap(element a[], int n)
+{
+    int k;
+
+    for(k = 1; k <= n; k++)
+        h[k] = a[k-1];
+    csize = n;
+
+    for(k = n/2; k >= 1; k--)
+        adjust(k);
+}
 
 myheap::myheap()
 {
@@ -46,8 +60,8 @@ void myheap::insert_heap(element t)
 {
     int k;
     csize ++;
-    k = csize;
-    while((k != 1) && (t.score > h[k / 2].score))
+    k = csize; // 끝원소 위치
+    while((k != 1) && (t.score > h[k / 2].score)) // k != root 도달
     {
         h[k] = h[k / 2];
         k /= 2;
@@ -59,16 +73,16 @@ element myheap::delete_heap()
 {
     element t;
     element tmp;
-    int parent, child;
+    int parent, child; //array에 저장 
 
-    t = h[1];
-    tmp = h[csize];
+    t = h[1]; //root
+    tmp = h[csize]; // 끝원소 저장
     csize --;
-    parent = 1;
-    child = 2;
-    while(child <= csize)
+    parent = 1; //root
+    child = 2; // root의 left child
+    while(child <= csize) //child가 존재
     {
-        if((child < csize) && (h[child].score < h[child + 1].score))
+        if((child < csize) && (h[child].score < h[child + 1].score)) // 오른쪽이 있고 오른쪽이 크면
             child ++; // pick right child 
         if(tmp.score >= h[child].score)
             break;
@@ -119,17 +133,44 @@ int myheap::node_delete_by_name(string tname)
         return 1;
     }
     else
-        return 0;
+        return 0;   
 }
 
 int delete_node(element a[], int troot, string tname, int n)
 {
     if (troot > n)
         return 0;
-    if (a[troot] == tname)
+    if (a[troot].name == tname)
+        a[troot] = a[n];
+        heap_adjust()
         return 1;
     else
-        
+
+}
+
+void myheap::adjust(int troot)
+{
+    double tmpkey;
+    int child;
+    element tmp;
+
+    tmp = h[troot];
+    tmpkey = h[troot].score;
+    child = 2 * troot;
+
+    while(child <= csize)
+    {
+        if((child < csize) && (h[child].score) < (h[child + 1].score))
+            child ++;
+        if(tmpkey > h[child].score)
+            break;
+        else
+        {
+            h[child/2] = h[child];
+            child *= 2;
+        }
+    }
+    h[child/2] = tmp;
 }
 
 void heap_adjust(element a[], int troot, int size)
