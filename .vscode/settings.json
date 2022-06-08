@@ -4,6 +4,9 @@
         "string": "cpp",
         "iosfwd": "cpp",
         "typeinfo": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "bitset": "cpp",
+        "locale": "cpp",
+        "memory": "cpp"
     }
 }
