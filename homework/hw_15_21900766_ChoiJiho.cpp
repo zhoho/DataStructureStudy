@@ -13,7 +13,9 @@ class s_record
 
 s_record::s_record()
 {
-      s_record s_list = 0;
+      s_id = "none";
+      name = "none";
+      score = 0.0;
 }
 
 s_record::s_record(string s1, string s2, double n)
