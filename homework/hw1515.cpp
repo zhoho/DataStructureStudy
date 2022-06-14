@@ -149,11 +149,11 @@ int main()
     int n = 12;
 
     // insertion_sort(s_list, n);
-    bubble_sort(s_list, n);
+    //bubble_sort(s_list, n);
     // selection_sort(s_list, n);
 
     // quick_sort(s_list, 0, n-1);
-    // merge_sort(s_list, n);
+    merge_sort(s_list, n);
     // heap_sort(s_list, n); 
 
     cout << " < The result of the sorting >" << endl;
